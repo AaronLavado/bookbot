@@ -1,56 +1,34 @@
-def main():
-    fatdictionary = {}
-
-    spacecounter = {}
+def pypy():
+    letters = "abcdefghijklmnopqrstuvwxyz"
+    char_count = {}
+    # You don't need this empty count list
+    # count = []  
     
-    acharacter = "a"
-    bcharacter = "b"  
-    ccharacter = "c"
-    dcharacter = "d"
-    echaracter = "e"
-    fcharacter = "f"
-    gcharacter = "g"
-    hcharacter = "h"
-    icharacter = "i"
-    jcharacter = "j"
-    kcharacter = "k"
-    lcharacter = "l"
-    mcharacter = "m"
-    ncharacter = "n"
-    ocharacter = "o"
-    pcharacter = "p"
-    qcharacter = "q"
-    rcharacter = "r"
-    scharacter = "s"
-    tcharacter = "t"
-    ucharacter = "u"
-    vcharacter = "v"
-    wcharacter = "w"
-    xcharacter = "x"
-    ycharacter = "y"
-    zcharacter = "z"
-    
-    spacechar = " "
     with open("books/frankenstein.txt") as f:
-        file_contents = f.read()
-        
-        lowercase = file_contents.lower()
-        acount = lowercase.count(acharacter)
-        bcount = lowercase.count(bcharacter)
-        ccount = lowercase.count(ccharacter)
-        ecount = lowercase.count(echaracter)
-        ncount = lowercase.count(ncharacter)
-        pcount = lowercase.count(pcharacter)
-        ccount = lowercase.count(ccharacter)
-        spacecount = lowercase.count(spacechar)
-    fatdictionary = {
-        echaracter: ecount,
-        ncharacter: ncount,
-        pcharacter: pcount,
-        ccharacter: ccount,
-        
-    }
+        text = f.read().lower()
+        for letter in letters:
+            char_count[letter] = text.count(letter)
+        wordsplit = text.split()
+        wordcount = len(wordsplit)
+    
+    char_list = []
+    # This line had an error. Should be:
+    for char, count in char_count.items():
+        char_list.append({"char": char, "count": count})
 
+    # Don't forget to add the sorting:
+    def sort_on(dict):
+        return dict["count"]
+    
+    char_list.sort(reverse=True, key=sort_on)
 
-    print(fatdictionary)
-main()
+    # Now let's print the report:
+    print("--- Begin report of books/frankenstein.txt ---")
+    print(f"{wordcount} words found in the document\n")
+    
+    for char_dict in char_list:
+        print(f"The '{char_dict['char']}' character was found {char_dict['count']} times")
+    
+    print("--- End report ---")
+
+pypy()
